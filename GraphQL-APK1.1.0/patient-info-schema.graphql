@@ -1,0 +1,59 @@
+# The Query type defines the root queries that can be executed
+type Query {
+  patient(id: ID!): Patient
+  patients: [Patient]
+}
+
+# A Patient type to represent patient information
+type Patient {
+  id: ID!
+  name: String!
+  age: Int!
+  gender: String!
+  contactInfo: ContactInfo
+  medicalHistory: [MedicalRecord]
+  appointments: [Appointment]
+  medications: [Medication]
+}
+
+# A type to represent contact information of a patient
+type ContactInfo {
+  phone: String
+  email: String
+  address: String
+}
+
+# A type to represent a medical record
+type MedicalRecord {
+  date: String!
+  description: String!
+  doctor: Doctor
+}
+
+# A type to represent an appointment
+type Appointment {
+  date: String!
+  time: String!
+  doctor: Doctor
+  purpose: String
+}
+
+# A type to represent a medication
+type Medication {
+  name: String!
+  dosage: String!
+  frequency: String!
+}
+
+# A type to represent a doctor
+type Doctor {
+  id: ID!
+  name: String!
+  specialty: String!
+  contactInfo: ContactInfo
+}
+
+# The schema declaration, specifying the query entry point
+schema {
+  query: Query
+}

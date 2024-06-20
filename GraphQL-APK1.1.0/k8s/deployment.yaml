@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: patient-info-backend-deployment
+  labels:
+    app: patient-info-backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: patient-info-backend
+  template:
+    metadata:
+      labels:
+        app: patient-info-backend
+    spec:
+      containers:
+        - name: patient-info-backend
+          image: sega1234/patient-info-backend:latest
+          ports:
+            - containerPort: 8080
