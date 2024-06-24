@@ -8,6 +8,27 @@ import (
 	"github.com/graphql-go/handler"
 )
 
+// Define the Doctor type
+var doctorType = graphql.NewObject(
+	graphql.ObjectConfig{
+		Name: "Doctor",
+		Fields: graphql.Fields{
+			"id": &graphql.Field{
+				Type: graphql.String,
+			},
+			"name": &graphql.Field{
+				Type: graphql.String,
+			},
+			"specialty": &graphql.Field{
+				Type: graphql.String,
+			},
+			"contactInfo": &graphql.Field{
+				Type: contactInfoType,
+			},
+		},
+	},
+)
+
 // Define the Patient type
 var patientType = graphql.NewObject(
 	graphql.ObjectConfig{
@@ -77,24 +98,6 @@ var medicalHistoryType = graphql.NewObject(
 	},
 )
 
-// Define the Doctor type
-var doctorType = graphql.NewObject(
-	graphql.ObjectConfig{
-		Name: "Doctor",
-		Fields: graphql.Fields{
-			"id": &graphql.Field{
-				Type: graphql.String,
-			},
-			"name": &graphql.Field{
-				Type: graphql.String,
-			},
-			"specialty": &graphql.Field{
-				Type: graphql.String,
-			},
-		},
-	},
-)
-
 // Define the Appointment type
 var appointmentType = graphql.NewObject(
 	graphql.ObjectConfig{
@@ -134,6 +137,7 @@ var medicationType = graphql.NewObject(
 	},
 )
 
+// Sample data for patients
 var patients = []map[string]interface{}{
 	{
 		"id":     "12345",
@@ -243,6 +247,40 @@ var patients = []map[string]interface{}{
 	},
 }
 
+// Sample data for doctors
+var doctors = []map[string]interface{}{
+	{
+		"id":        "d1",
+		"name":      "Dr. Smith",
+		"specialty": "General Medicine",
+		"contactInfo": map[string]interface{}{
+			"phone":   "555-1234",
+			"email":   "smith@hospital.com",
+			"address": "123 Medical St, Medcity, USA",
+		},
+	},
+	{
+		"id":        "d2",
+		"name":      "Dr. Jones",
+		"specialty": "Cardiology",
+		"contactInfo": map[string]interface{}{
+			"phone":   "555-5678",
+			"email":   "jones@hospital.com",
+			"address": "456 Heart Ave, Cardiotown, USA",
+		},
+	},
+	{
+		"id":        "d3",
+		"name":      "Dr. Brown",
+		"specialty": "Dermatology",
+		"contactInfo": map[string]interface{}{
+			"phone":   "555-8765",
+			"email":   "brown@hospital.com",
+			"address": "789 Skin Blvd, Dermacity, USA",
+		},
+	},
+}
+
 // Define the Query type
 var queryType = graphql.NewObject(
 	graphql.ObjectConfig{
@@ -261,6 +299,25 @@ var queryType = graphql.NewObject(
 						for _, patient := range patients {
 							if patient["id"] == id {
 								return patient, nil
+							}
+						}
+					}
+					return nil, nil
+				},
+			},
+			"doctor": &graphql.Field{
+				Type: doctorType,
+				Args: graphql.FieldConfigArgument{
+					"id": &graphql.ArgumentConfig{
+						Type: graphql.String,
+					},
+				},
+				Resolve: func(params graphql.ResolveParams) (interface{}, error) {
+					id, ok := params.Args["id"].(string)
+					if ok {
+						for _, doctor := range doctors {
+							if doctor["id"] == id {
+								return doctor, nil
 							}
 						}
 					}

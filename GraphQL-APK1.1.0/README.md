@@ -21,7 +21,6 @@ The sample API used for this application is for a patient information management
 ## Install WSO2 APK 1.1.0 
 
 1. Install WSO2 APK 1.1.0.
-
 ```
 kubectl create ns apk
 helm repo add wso2apk https://github.com/wso2/apk/releases/download/1.1.0
@@ -35,5 +34,17 @@ kubectl get pods -n apk
 ```
 
 ## Deploy backend services for the Patient Information API
+
+1. Deploy the backend service
+```
+cd k8s
+kubectl apply -f . -n apk
+```
+
+2. Verify the deployment
+```
+kubectl get pods -n apk
+```
+
 
 
