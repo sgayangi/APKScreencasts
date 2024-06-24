@@ -1,0 +1,27 @@
+---
+name: "PatientInfoAPI"
+basePath: "/patientinformation"
+version: "1.0.0"
+type: "GRAPHQL"
+defaultVersion: false
+subscriptionValidation: false
+endpointConfigurations:
+  production:
+    endpoint: http://localhost:8080/graphql
+operations:
+  - target: "patient"
+    verb: "QUERY"
+    secured: true
+    scopes: []
+  - target: "patients"
+    verb: "QUERY"
+    secured: true
+    scopes: []
+  - target: "doctor"
+    verb: "QUERY"
+    secured: true
+    scopes: []
+  - target: "doctors"
+    verb: "QUERY"
+    secured: true
+    scopes: []
