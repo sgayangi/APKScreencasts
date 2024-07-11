@@ -1,13 +1,12 @@
----
-name: "PatientInfoAPI"
+name: "PatientInformationAPI"
 basePath: "/patientinformation"
 version: "1.0.0"
 type: "GRAPHQL"
-defaultVersion: false
-subscriptionValidation: false
 endpointConfigurations:
   production:
-    endpoint: "http://graphql-faker-service:9002/graphql"
+    endpoint: http://graphql-faker-service:9002/graphql
+defaultVersion: false
+subscriptionValidation: false
 operations:
   - target: "patient"
     verb: "QUERY"
