@@ -16,4 +16,8 @@ curl --location 'https://idp.am.wso2.com:9095/oauth2/token' \
 
 3. Deploy API using apk-conf file
 
-
+curl --location 'https://api.am.wso2.com:9095/api/deployer/1.1.0/apis/deploy' \
+--header 'Authorization: Bearer AUTH_TOKEN' \
+--form 'apkConfiguration=@"/Users/gayangiseneviratne/Documents/APIM_APK/APK/Screencasts/APKScreencasts/GraphQL-APK1.1.0/demo-files/patient-info.apk-conf"' \
+--form 'definitionFile=@"/Users/gayangiseneviratne/Documents/APIM_APK/APK/Screencasts/APKScreencasts/GraphQL-APK1.1.0/demo-files/patient-info-schema.graphql"' \
+--form 'apiType="GRAPHQL"'
