@@ -1,0 +1,39 @@
+---
+apiVersion: "dp.wso2.com/v1alpha2"
+kind: "GQLRoute"
+metadata:
+  name: "aa10ff4e169889cb5656e0fd6d23085e204f2ceb-production-gqlroute-1"
+  labels:
+    api-name: "d319a181bdc8836f108727042daf43cad3465a76"
+    api-version: "91e95be6b6634e3c21072dfcd661146728694326"
+    organization: "7505d64a54e061b7acd54ccd58b49dc43500b635"
+    managed-by: "apk"
+spec:
+  hostnames:
+  - "default.gw.wso2.com"
+  rules:
+  - matches:
+    - type: "QUERY"
+      path: "patient"
+    filters: []
+  - matches:
+    - type: "QUERY"
+      path: "patients"
+    filters: []
+  - matches:
+    - type: "QUERY"
+      path: "doctor"
+    filters: []
+  - matches:
+    - type: "QUERY"
+      path: "doctors"
+    filters: []
+  backendRefs:
+  - group: "dp.wso2.com"
+    kind: "Backend"
+    name: "backend-04b55f6aae1b6caf40c2df224584e781e1f2c54e-api"
+  parentRefs:
+  - group: "gateway.networking.k8s.io"
+    kind: "Gateway"
+    name: "wso2-apk-default"
+    sectionName: "httpslistener"
